@@ -33,18 +33,27 @@ import {
 } from "react-icons/fi";
 import { IconType } from "react-icons";
 import { ReactText } from "react";
+import router from "next/router";
+
+export type RegisterProps = {
+  /**
+   * a node to be rendered in the special component.
+   */
+  children?: ReactNode;
+};
 
 interface LinkItemProps {
   name: string;
   icon: IconType;
+  href: string;
 }
 const LinkItems: Array<LinkItemProps> = [
-  { name: "Home", icon: FiHome },
-  { name: "Users", icon: FiUser },
-  { name: "Settings", icon: FiSettings },
+  { name: "Home", icon: FiHome, href: "/" },
+  { name: "Users", icon: FiUser, href: "/users" },
+  { name: "Settings", icon: FiSettings, href: "/settings" },
 ];
 
-export const HorusMenu = () => {
+export const HorusMenu = ({ children }: RegisterProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
@@ -67,7 +76,9 @@ export const HorusMenu = () => {
       </Drawer>
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }} p="4"></Box>
+      <Box ml={{ base: 0, md: 60 }} p="4">
+        {children}
+      </Box>
     </Box>
   );
 };
@@ -96,7 +107,11 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       </Flex>
       <Box marginTop="20px">
         {LinkItems.map((link) => (
-          <NavItem key={link.name} icon={link.icon}>
+          <NavItem
+            key={link.name}
+            icon={link.icon}
+            onClick={() => router.push(link.href)}
+          >
             {link.name}
           </NavItem>
         ))}

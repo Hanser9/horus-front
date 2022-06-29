@@ -1,0 +1,41 @@
+fragment UsersFragment on Users {
+  user_id
+  user_name
+  first_name
+  last_name
+  create_date
+  active
+  user_type
+  email
+  pass
+}
+
+query GetUsers {
+  GetUsers {
+    ...UsersFragment
+  }
+}
+
+mutation CreateUser(
+  $user_name: String!
+  $first_name: String!
+  $last_name: String!
+  $active: Boolean!
+  $email: String!
+  $pass: String!
+  $user_type: type_user!
+) {
+  CreateUser(
+    variables: {
+      user_name: $user_name
+      first_name: $first_name
+      last_name: $last_name
+      active: $active
+      email: $email
+      pass: $pass
+      user_type: $user_type
+    }
+  ) {
+    ...UsersFragment
+  }
+}
