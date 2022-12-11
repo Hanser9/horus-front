@@ -40,12 +40,12 @@ export const HorusHome = ({ children }: RegisterProps) => {
   const [dataUser, setDataUser] = useState([] as Users[]);
   const [createUserMutation, { data, loading, error }] = useCreateUserMutation({
     variables: {
-      user_name: "Hecnt",
-      first_name: "Jose Osvaldo",
+      user_name: "Martin",
+      first_name: "Martin",
       last_name: "Hernandez Rito",
       active: true,
-      email: "hecntdev@gmail.com",
-      pass: "HaloW117",
+      email: "martin.hernandez.makicop@gmail.com",
+      pass: "lemaos",
       user_type: Type_User.Admin,
     },
   });
